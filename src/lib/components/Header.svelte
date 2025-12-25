@@ -1,0 +1,92 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+
+	let isMenuOpen = $state(false);
+	let activeSection = $state('home');
+
+	const navItems = [
+		{ label: 'Home', href: '#home', id: 'home' },
+		{ label: 'Skills', href: '#skills', id: 'skills' },
+		{ label: 'Experience', href: '#experience', id: 'experience' },
+		{ label: 'Projects', href: '#projects', id: 'projects' },
+		{ label: 'Connect', href: '#contact', id: 'contact' }
+	];
+
+	onMount(() => {
+		const observerOptions = {
+			root: null,
+			rootMargin: '-50% 0px -50% 0px',
+			threshold: 0
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					activeSection = entry.target.id;
+				}
+			});
+		}, observerOptions);
+
+		const sections = document.querySelectorAll('section[id]');
+		sections.forEach((section) => observer.observe(section));
+
+		return () => observer.disconnect();
+	});
+</script>
+
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6">
+	<nav class="flex w-full max-w-7xl items-center justify-between">
+		<div class="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+			Abubker<span class="text-brand-primary">.</span>
+		</div>
+		<div
+			class="glass-nav hidden items-center gap-1 rounded-full border border-gray-200 bg-white/80 p-1.5 shadow-sm md:flex dark:border-white/10 dark:bg-black/40"
+		>
+			{#each navItems as item (item.id)}
+				<a
+					class="rounded-full px-6 py-2 text-sm font-medium transition-all {activeSection ===
+					item.id
+						? 'bg-brand-primary text-white shadow-md'
+						: 'text-gray-600 hover:text-brand-primary dark:text-gray-300 dark:hover:text-white'}"
+					href={item.href}>{item.label}</a
+				>
+			{/each}
+		</div>
+		<a
+			class="group hidden items-center gap-2 rounded-full border border-gray-300 bg-transparent px-5 py-2.5 transition-all duration-300 hover:border-brand-primary hover:bg-brand-primary/5 sm:flex dark:border-white/20 dark:hover:border-brand-primary"
+			href="/resume.pdf"
+		>
+			<span class="material-icons-outlined text-xl transition-colors group-hover:text-brand-primary"
+				>download</span
+			>
+			<span class="text-sm font-medium transition-colors group-hover:text-brand-primary"
+				>Download Resume</span
+			>
+		</a>
+		<button
+			onclick={() => (isMenuOpen = !isMenuOpen)}
+			class="p-2 text-gray-600 md:hidden dark:text-white"
+			aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+		>
+			<span class="material-icons-outlined text-3xl" aria-hidden="true"
+				>{isMenuOpen ? 'close' : 'menu'}</span
+			>
+		</button>
+	</nav>
+
+	{#if isMenuOpen}
+		<div
+			class="glass-nav absolute top-24 left-4 right-4 flex flex-col gap-4 rounded-2xl p-6 shadow-xl md:hidden dark:bg-black/80"
+		>
+			{#each navItems as item (item.id)}
+				<a
+					class="text-lg font-medium {activeSection === item.id
+						? 'text-brand-primary'
+						: 'text-gray-900 dark:text-white'}"
+					href={item.href}
+					onclick={() => (isMenuOpen = false)}>{item.label}</a
+				>
+			{/each}
+		</div>
+	{/if}
+</header>
