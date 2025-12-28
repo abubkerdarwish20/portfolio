@@ -17,23 +17,23 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://abubker-portfolio.vercel.app/" />
+	<meta property="og:url" content="https://abubker-dev.netlify.app/" />
 	<meta property="og:title" content="Abubker Portfolio | Frontend Developer" />
 	<meta
 		property="og:description"
 		content="I craft user-friendly and aesthetic digital experiences. With a passion for clean code and modern design, I turn complex problems into elegant solutions."
 	/>
-	<meta property="og:image" content="https://abubker-portfolio.vercel.app/og-image.png" />
+	<meta property="og:image" content="https://abubker-dev.netlify.app/og-image.png" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://abubker-portfolio.vercel.app/" />
+	<meta property="twitter:url" content="https://abubker-dev.netlify.app/" />
 	<meta property="twitter:title" content="Abubker Portfolio | Frontend Developer" />
 	<meta
 		property="twitter:description"
 		content="I craft user-friendly and aesthetic digital experiences. With a passion for clean code and modern design, I turn complex problems into elegant solutions."
 	/>
-	<meta property="twitter:image" content="https://abubker-portfolio.vercel.app/og-image.png" />
+	<meta property="twitter:image" content="https://abubker-dev.netlify.app/og-image.png" />
 
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />

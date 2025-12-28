@@ -14,20 +14,49 @@
 	}
 
 	const introWords = splitWords('Hey, I am Abubker Darwish');
+
+	const cards = [
+		{
+			id: 1,
+			content:
+				"Abubker's ability to translate our vision into a stunning website was incredible. His attention to detail and technical skills are top-notch. Highly recommended!",
+			author: 'Carolina Abott',
+			role: 'Business Owner',
+			avatar:
+				'https://lh3.googleusercontent.com/aida-public/AB6AXuA0Ke7AK9UIRfAjHuMa9utC_y-tqqLBTboTWikqSnjr7SUoSlIyAaDQrwXHQc8uJ5Xh99IwclUOxZSvGiKbXUt8frjG4aCVZOFI-12Ys-1FA-XMJdfUtd4LF76MGjdStm0nonAupAczN2ATMQJfxzggeBNOoOZHZqMtVY7sPBpjhmOEaEVmKI6RWDd1OH9zr0QUDKla3VxjcG9BiOBDEJYnm00S5AMaCiQVvnlaOqXZw9OSxXGnAQaLGTmzag0wUHiblQIpYY4jIoQ'
+		},
+		{
+			id: 2,
+			content:
+				'A highly skilled developer who consistently delivers high-quality code. The project was completed on time and exceeded our expectations in terms of performance.',
+			author: 'Marcus Chen',
+			role: 'Tech Lead',
+			avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus'
+		}
+	];
+
+	let activeIndex = $state(0);
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			activeIndex = (activeIndex + 1) % cards.length;
+		}, 4000);
+		return () => clearInterval(interval);
+	});
 </script>
 
 <div class="flex flex-col items-start space-y-8">
 	<div class="space-y-4">
-		<p class=" text-lg font-medium tracking-wide sm:text-xl flex flex-wrap gap-x-[0.3em] h-7">
+		<p class="h-7 flex flex-wrap gap-x-[0.3em] text-lg font-medium tracking-wide sm:text-xl">
 			{#each introWords as { word, i } (i)}
 				<span
-					class="from-gray-900 to-gray-900 bg-linear-to-r text-transparent bg-clip-text dark:from-white dark:to-white inline-block transition-all duration-700 {mounted
+					class="inline-block transition-all duration-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
 						? 'translate-y-0 opacity-100'
 						: 'translate-y-4 opacity-0'}"
 					style="transition-delay: {i * 100}ms"
 				>
 					{#if word === 'Abubker' || word === 'Darwish'}
-						<span class="font-bold text-brand-primary">{word}</span>
+						<span class="text-brand-primary font-bold">{word}</span>
 					{:else}
 						{word}
 					{/if}
@@ -37,14 +66,14 @@
 
 		<h1 class="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
 			<span
-				class="from-gray-900 to-gray-900 bg-linear-to-r text-transparent bg-clip-text dark:from-white dark:to-white inline-block transition-all duration-1000 delay-700 {mounted
+				class="inline-block transition-all duration-1000 delay-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
 					? 'translate-y-0 opacity-100'
 					: 'translate-y-8 opacity-0'}"
 			>
 				Frontend
 			</span>
 			<span
-				class="from-gray-900 to-gray-500 bg-linear-to-r bg-clip-text text-transparent dark:from-white dark:to-gray-400 inline-block transition-all duration-1000 delay-1000 {mounted
+				class="inline-block transition-all duration-1000 delay-1000 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 {mounted
 					? 'translate-y-0 opacity-100'
 					: 'translate-y-8 opacity-0'}"
 			>
@@ -53,7 +82,7 @@
 		</h1>
 
 		<p
-			class="max-w-lg text-base md:text-lg leading-relaxed text-gray-600 dark:text-gray-400 transition-all duration-1000 delay-1300 {mounted
+			class="max-w-lg text-base leading-relaxed text-gray-600 transition-all duration-1000 delay-1300 md:text-lg dark:text-gray-400 {mounted
 				? 'translate-y-0 opacity-100'
 				: 'translate-y-4 opacity-0'}"
 		>
@@ -68,7 +97,7 @@
 			: 'translate-y-4 opacity-0'}"
 	>
 		<a
-			class="bg-brand-primary shadow-brand-primary/20 hover:bg-orange-700 rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+			class="bg-brand-primary shadow-brand-primary/20 hover:bg-orange-700 transform rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1"
 			href="#contact"
 		>
 			Hire me
@@ -76,50 +105,57 @@
 	</div>
 
 	<div
-		class="mt-12 hidden w-full max-w-md sm:block transition-all duration-1000 delay-1900 {mounted
+		class="relative mt-12 hidden h-48 w-full max-w-md sm:block transition-all duration-1000 delay-1900 {mounted
 			? 'translate-y-0 opacity-100'
 			: 'translate-y-8 opacity-0'}"
 	>
-		<div
-			class="glass-card animate-float-delayed relative overflow-hidden rounded-2xl p-6 shadow-md"
-		>
-			<span
-				class="text-brand-primary absolute top-4 left-4 font-serif text-6xl opacity-20 leading-none"
-				>“</span
+		{#each cards as card, i (card.id)}
+			{@const isActive = i === activeIndex}
+			<div
+				class="glass-card absolute inset-0 rounded-2xl p-6 shadow-md transition-all duration-700 transform"
+				class:z-20={isActive}
+				class:opacity-100={isActive}
+				class:translate-y-0={isActive}
+				class:scale-100={isActive}
+				class:z-10={!isActive}
+				class:opacity-40={!isActive}
+				class:translate-y-8={!isActive}
+				class:scale-95={!isActive}
 			>
-			<div class="relative z-10 space-y-4 pl-2">
-				<p class="pt-2 text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
-					Abubker's ability to translate our vision into a stunning website was incredible. His
-					attention to detail and technical skills are top-notch. Highly recommended!
-				</p>
-				<div class="flex items-center gap-3 pt-2">
-					<img
-						alt="Client Portrait"
-						class="border-brand-primary/30 h-10 w-10 rounded-full border-2 object-cover"
-						src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0Ke7AK9UIRfAjHuMa9utC_y-tqqLBTboTWikqSnjr7SUoSlIyAaDQrwXHQc8uJ5Xh99IwclUOxZSvGiKbXUt8frjG4aCVZOFI-12Ys-1FA-XMJdfUtd4LF76MGjdStm0nonAupAczN2ATMQJfxzggeBNOoOZHZqMtVY7sPBpjhmOEaEVmKI6RWDd1OH9zr0QUDKla3VxjcG9BiOBDEJYnm00S5AMaCiQVvnlaOqXZw9OSxXGnAQaLGTmzag0wUHiblQIpYY4jIoQ"
-					/>
-					<div>
-						<h4 class="text-sm font-semibold text-gray-900 dark:text-white">Carolina Abott</h4>
-						<p class="text-xs text-gray-500 dark:text-gray-400">Business Owner</p>
+				<span
+					class="text-brand-primary absolute top-4 left-4 font-serif text-6xl leading-none opacity-20"
+					>“</span
+				>
+				<div class="relative z-10 space-y-4 pl-2">
+					<p class="pt-2 text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
+						{card.content}
+					</p>
+					<div class="flex items-center gap-3 pt-2">
+						<img
+							alt={card.author}
+							class="border-brand-primary/30 h-10 w-10 rounded-full border-2 object-cover"
+							src={card.avatar}
+						/>
+						<div>
+							<h4 class="text-sm font-semibold text-gray-900 dark:text-white">{card.author}</h4>
+							<p class="text-xs text-gray-500 dark:text-gray-400">{card.role}</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{/each}
 	</div>
 </div>
 
 <style>
-	/* Standard float animation for testimonial */
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-10px);
-		}
+	.glass-card {
+		background: rgba(255, 255, 255, 0.7);
+		backdrop-filter: blur(10px);
+		border: 1px solid rgba(255, 255, 255, 0.2);
 	}
-	.animate-float-delayed {
-		animation: float 6s ease-in-out infinite;
+
+	:global(.dark) .glass-card {
+		background: rgba(30, 30, 30, 0.7);
+		border-color: rgba(255, 255, 255, 0.05);
 	}
 </style>

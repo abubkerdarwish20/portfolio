@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	const experiences = [
 		{
 			role: 'Senior Front-end Developer',
@@ -69,9 +70,10 @@
 		</div>
 
 		<div class="space-y-6">
-			{#each experiences as exp (exp.role + exp.company)}
+			{#each experiences as exp, i (exp.role + exp.company)}
 				<div
-					class="group bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-100 dark:border-white/5 shadow-md hover:shadow-xl {exp.borderHover} transition-all duration-300 flex flex-col md:flex-row gap-6 relative overflow-hidden"
+					in:fly={{ y: 50, duration: 800, delay: i * 200 }}
+					class="group bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-100 dark:border-white/5 shadow-md hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.01] {exp.borderHover} transition-all duration-500 flex flex-col md:flex-row gap-6 relative overflow-hidden"
 				>
 					<div
 						class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b {exp.gradientFrom} {exp.gradientTo} opacity-0 group-hover:opacity-100 transition-opacity duration-300"
