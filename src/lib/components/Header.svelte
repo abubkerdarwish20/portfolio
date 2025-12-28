@@ -37,7 +37,7 @@
 
 <header class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-6">
 	<nav
-		class="flex w-full max-w-7xl items-center justify-between glass-nav px-2 py-1 md:px-4 lg:px-6 rounded-full shadow-sm"
+		class="flex w-full max-w-7xl items-center justify-between glass-nav backdrop-blur-sm px-2 py-1 md:px-4 lg:px-6 rounded-full shadow-sm"
 	>
 		<a
 			href="/"
@@ -71,7 +71,7 @@
 
 			<button
 				onclick={() => (isMenuOpen = !isMenuOpen)}
-				class="md:hidden h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
+				class="md:hidden h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
 				aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 			>
 				<span class="material-icons-outlined text-3xl" aria-hidden="true"
