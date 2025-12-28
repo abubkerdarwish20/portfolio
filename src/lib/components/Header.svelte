@@ -57,25 +57,27 @@
 			{/each}
 		</div>
 		<div class="flex items-center gap-3">
-			<a
-				class="group hidden items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 text-white shadow-md transition-all duration-300 hover:shadow-lg sm:flex"
-				href="/abubker-darwish-cv.pdf"
-				download="abubker-darwish-cv.pdf"
+			<div class="flex items-center gap-3">
+				<a
+					class="group hidden items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 text-white shadow-md transition-all duration-300 hover:shadow-lg sm:flex"
+					href="/abubker-darwish-cv.pdf"
+					download="abubker-darwish-cv.pdf"
+				>
+					<span class="material-icons-outlined text-xl text-white transition-colors">download</span>
+					<span class="text-sm font-medium text-white transition-colors">Download Resume</span>
+				</a>
+				<ThemeToggle />
+			</div>
+			<button
+				onclick={() => (isMenuOpen = !isMenuOpen)}
+				class="p-2 text-gray-600 md:hidden dark:text-white flex items-center"
+				aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 			>
-				<span class="material-icons-outlined text-xl text-white transition-colors">download</span>
-				<span class="text-sm font-medium text-white transition-colors">Download Resume</span>
-			</a>
-			<ThemeToggle />
+				<span class="material-icons-outlined text-3xl" aria-hidden="true"
+					>{isMenuOpen ? 'close' : 'menu'}</span
+				>
+			</button>
 		</div>
-		<button
-			onclick={() => (isMenuOpen = !isMenuOpen)}
-			class="p-2 text-gray-600 md:hidden dark:text-white"
-			aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-		>
-			<span class="material-icons-outlined text-3xl" aria-hidden="true"
-				>{isMenuOpen ? 'close' : 'menu'}</span
-			>
-		</button>
 	</nav>
 
 	{#if isMenuOpen}

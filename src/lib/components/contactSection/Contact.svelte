@@ -37,7 +37,7 @@
 				<div class="flex flex-wrap gap-4 justify-center lg:justify-start">
 					<a
 						class="group flex items-center gap-3 px-4 lg:px-8 py-4 lg:py-4 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-semibold text-base lg:text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1"
-						href="mailto:Abubker.darwish@gmail.com"
+						href="mailto:abubker.darwish@gmail.com"
 					>
 						<span class="material-icons-outlined">email</span>
 						<span>Say Hello</span>
@@ -67,7 +67,7 @@
 							</p>
 							<a
 								class="text-lg font-medium text-gray-900 dark:text-white hover:text-brand-primary transition-colors break-all"
-								href="mailto:Abubker.darwish@gmail.com"
+								href="mailto:abubker.darwish@gmail.com"
 							>
 								Abubker.darwish@gmail.com
 							</a>
