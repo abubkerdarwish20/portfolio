@@ -20,7 +20,7 @@
 				<a
 					aria-label="GitHub"
 					class="group p-2 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all duration-300"
-					href="https://github.com"
+					href="https://github.com/abubkerdarwish20"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -40,7 +40,7 @@
 				<a
 					aria-label="LinkedIn"
 					class="group p-2 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all duration-300"
-					href="https://linkedin.com"
+					href="https://www.linkedin.com/in/abubker-darwish/"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -58,11 +58,9 @@
 					</svg>
 				</a>
 				<a
-					aria-label="Twitter"
+					aria-label="Email"
 					class="group p-2 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all duration-300"
-					href="https://twitter.com"
-					target="_blank"
-					rel="noopener noreferrer"
+					href="mailto:abubker.darwish@gmail.com"
 				>
 					<svg
 						aria-hidden="true"
@@ -71,7 +69,7 @@
 						viewBox="0 0 24 24"
 					>
 						<path
-							d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
+							d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
 						></path>
 					</svg>
 				</a>

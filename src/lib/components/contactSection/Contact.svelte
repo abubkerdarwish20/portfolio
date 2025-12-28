@@ -1,16 +1,57 @@
+<script lang="ts">
+	let name = $state('');
+	let email = $state('');
+	let message = $state('');
+	let errors = $state({ name: '', email: '', message: '' });
+	let isSubmitting = $state(false);
+
+	function validate() {
+		let isValid = true;
+		const newErrors = { name: '', email: '', message: '' };
+
+		if (!name.trim()) {
+			newErrors.name = 'Name is required';
+			isValid = false;
+		}
+
+		if (!email.trim()) {
+			newErrors.email = 'Email is required';
+			isValid = false;
+		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+			newErrors.email = 'Invalid email format';
+			isValid = false;
+		}
+
+		if (!message.trim()) {
+			newErrors.message = 'Message is required';
+			isValid = false;
+		}
+
+		errors = newErrors;
+		return isValid;
+	}
+
+	async function handleSubmit(e: Event) {
+		e.preventDefault();
+		if (!validate()) return;
+
+		isSubmitting = true;
+	}
+</script>
+
 <section
 	class="scroll-m-16 scroll-section relative z-10 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5"
 	id="contact"
 >
 	<div class="absolute inset-0 z-0 bg-hero-glow-light dark:bg-hero-glow pointer-events-none"></div>
 	<div
-		class="absolute left-[-10%] top-[20%] w-[800px] h-[800px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-40 pointer-events-none"
+		class="absolute left-[-10%] top-[20%] w-200 h-200 rounded-full border border-gray-200/40 dark:border-white/5 opacity-40 pointer-events-none"
 	></div>
 	<div
-		class="absolute left-[-5%] top-[25%] w-[600px] h-[600px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-30 pointer-events-none"
+		class="absolute left-[-5%] top-[25%] w-150 h-150 rounded-full border border-gray-200/40 dark:border-white/5 opacity-30 pointer-events-none"
 	></div>
 	<div
-		class="absolute left-[0%] top-[30%] w-[400px] h-[400px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-20 pointer-events-none"
+		class="absolute left-[0%] top-[30%] w-100 h-100 rounded-full border border-gray-200/40 dark:border-white/5 opacity-20 pointer-events-none"
 	></div>
 	<div
 		class="absolute left-[10%] top-[20%] w-24 h-24 rounded-2xl bg-linear-to-br from-primary to-accent-orange opacity-10 blur-2xl animate-float pointer-events-none"
@@ -34,85 +75,82 @@
 					<h4
 						class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide"
 					>
-						Hotline 24/7
+						Mobile
 					</h4>
-					<p class="text-3xl font-bold text-gray-900 dark:text-white">(+23) 5535 68 68</p>
+					<p class="text-3xl font-bold text-gray-900 dark:text-white">(+967) 7710 749 44</p>
 				</div>
 				<div class="space-y-4 pt-2">
 					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-[90px]">Address:</span>
+						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Address:</span>
 						<span class="text-gray-600 dark:text-gray-400 leading-relaxed"
-							>2972 Westheimer Rd. Santa Ana, Illinois 85486</span
+							>Yemen-Hadramout-Mukalla</span
 						>
 					</div>
 					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-[90px]">Email:</span>
-						<span class="text-gray-600 dark:text-gray-400">Abubker.dev@example.com</span>
+						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Email:</span>
+						<span class="text-gray-600 dark:text-gray-400">Abubker.darwish@gmail.com</span>
 					</div>
+
 					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-[90px]">Fax:</span>
-						<span class="text-gray-600 dark:text-gray-400">(702) 555-0122</span>
-					</div>
-					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-[90px]">Work Hour:</span>
-						<span class="text-gray-600 dark:text-gray-400">Mon - Sat: 9:00 - 18:00</span>
+						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Work Hour:</span>
+						<span class="text-gray-600 dark:text-gray-400">Sun - Thu: 8:00 - 17:00</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="lg:col-span-7 w-full">
-				<form class="space-y-6">
+				<form class="space-y-6" onsubmit={handleSubmit}>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div class="space-y-2">
 							<input
-								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
+								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 {errors.name
+									? 'border-red-500'
+									: ''}"
 								id="name"
 								placeholder="Name*"
 								type="text"
+								bind:value={name}
 							/>
+							{#if errors.name}
+								<p class="text-red-500 text-sm ml-1">{errors.name}</p>
+							{/if}
 						</div>
 						<div class="space-y-2">
 							<input
-								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400"
+								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 {errors.email
+									? 'border-red-500'
+									: ''}"
 								id="email"
 								placeholder="Email Address*"
 								type="email"
+								bind:value={email}
 							/>
+							{#if errors.email}
+								<p class="text-red-500 text-sm ml-1">{errors.email}</p>
+							{/if}
 						</div>
 					</div>
+
 					<div class="space-y-2">
 						<textarea
-							class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none h-16"
-							id="help1"
+							class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none h-32 {errors.message
+								? 'border-red-500'
+								: ''}"
+							id="message"
 							placeholder="How can we help you?"
+							bind:value={message}
 						></textarea>
+						{#if errors.message}
+							<p class="text-red-500 text-sm ml-1">{errors.message}</p>
+						{/if}
 					</div>
-					<div class="space-y-2">
-						<textarea
-							class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none h-32"
-							id="help2"
-							placeholder="How can we help you?"
-						></textarea>
-					</div>
-					<div class="flex items-center gap-3">
-						<input
-							class="w-5 h-5 text-brand-primary border-gray-300 rounded focus:ring-brand-primary focus:ring-2 bg-gray-50 dark:bg-dark-card dark:border-white/10"
-							id="terms"
-							type="checkbox"
-						/>
-						<label class="text-sm text-gray-600 dark:text-gray-400" for="terms">
-							By submitting, I'm agreed to the
-							<a
-								class="underline hover:text-brand-primary transition-colors"
-								href="javascript:void(0)">Terms &amp; Conditions</a
-							>
-						</label>
-					</div>
+
 					<button
-						class="w-full sm:w-auto px-10 py-4 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-bold text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1"
+						class="w-full cursor-pointer sm:w-auto px-10 py-3 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-bold text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed"
 						type="submit"
+						disabled={isSubmitting}
 					>
-						Request Now
+						{isSubmitting ? 'Sending...' : 'Request Now'}
 					</button>
 				</form>
 			</div>

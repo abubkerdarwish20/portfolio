@@ -4,13 +4,12 @@
 	import Header from '$lib/components/Header.svelte';
 	import Hero from '$lib/components/heroSection/Hero.svelte';
 	import Experience from '$lib/components/experienceSection/Experience.svelte';
-	import Projects from '$lib/components/Projects.svelte';
+	// import Projects from '$lib/components/Projects.svelte';
 	import Skills from '$lib/components/techSection/Skills.svelte';
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 </script>
 
 <svelte:head>
-	<title>Abubker - Web Developer Portfolio</title>
+	<title>Abubker Portfolio</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 	<link
@@ -25,8 +24,7 @@
 	<Hero />
 	<Skills />
 	<Experience />
-	<Projects />
+	<!-- <Projects /> -->
 	<Contact />
 </main>
 <Footer />
-<ThemeToggle />

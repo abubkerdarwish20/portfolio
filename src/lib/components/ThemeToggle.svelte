@@ -26,16 +26,14 @@
 	}
 </script>
 
-<div class="fixed bottom-6 right-6 z-50">
-	<button
-		onclick={toggleTheme}
-		class="flex items-center justify-center rounded-full border border-gray-200 bg-white p-3 text-gray-800 shadow-lg transition-transform hover:scale-110 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
-		aria-label="Toggle dark mode"
-	>
-		{#if isDark}
-			<span class="material-icons-outlined">light_mode</span>
-		{:else}
-			<span class="material-icons-outlined">dark_mode</span>
-		{/if}
-	</button>
-</div>
+<button
+	onclick={toggleTheme}
+	class="cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
+	aria-label="Toggle dark mode"
+>
+	{#if isDark}
+		<span class="material-icons-outlined text-xl">light_mode</span>
+	{:else}
+		<span class="material-icons-outlined text-xl">dark_mode</span>
+	{/if}
+</button>

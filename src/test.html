@@ -151,17 +151,24 @@
 						>Contact</a
 					>
 				</div>
-				<a
-					class="group hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-white/20 hover:border-primary dark:hover:border-primary bg-transparent hover:bg-primary/5 transition-all duration-300"
-					href="#"
+				<button
+					aria-label="Toggle Theme"
+					class="theme-toggle-btn hidden sm:flex relative h-8 w-14 items-center rounded-full bg-gray-200/50 dark:bg-white/5 border border-gray-300 dark:border-white/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
 				>
-					<span class="material-icons-outlined text-xl group-hover:text-primary transition-colors"
-						>download</span
+					<span class="sr-only">Toggle Theme</span>
+					<span
+						class="absolute left-1 flex h-6 w-6 transform items-center justify-center rounded-full bg-white shadow-md transition-transform duration-300 dark:translate-x-6"
 					>
-					<span class="text-sm font-medium group-hover:text-primary transition-colors"
-						>Download Resume</span
-					>
-				</a>
+						<span
+							class="material-icons-outlined text-[16px] text-amber-500 opacity-100 transition-opacity duration-300 dark:opacity-0 absolute"
+							>light_mode</span
+						>
+						<span
+							class="material-icons-outlined text-[16px] text-indigo-500 opacity-0 transition-opacity duration-300 dark:opacity-100 absolute"
+							>dark_mode</span
+						>
+					</span>
+				</button>
 				<button class="md:hidden p-2 text-gray-600 dark:text-white">
 					<span class="material-icons-outlined text-3xl">menu</span>
 				</button>
@@ -1163,10 +1170,9 @@
 				</div>
 			</div>
 		</footer>
-		<div class="fixed bottom-6 right-6 z-50">
+		<div class="fixed bottom-6 right-6 z-50 sm:hidden">
 			<button
-				class="p-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-110 transition-transform"
-				id="theme-toggle"
+				class="theme-toggle-btn p-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white shadow-lg border border-gray-200 dark:border-gray-700 hover:scale-110 transition-transform"
 			>
 				<span class="material-icons-outlined block dark:hidden">dark_mode</span>
 				<span class="material-icons-outlined hidden dark:block">light_mode</span>
@@ -1174,7 +1180,7 @@
 		</div>
 		<script>
 			// Theme toggle logic
-			const themeToggleBtn = document.getElementById('theme-toggle');
+			const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
 			const htmlElement = document.documentElement;
 			// Check local storage or system preference
 			if (
@@ -1185,13 +1191,15 @@
 			} else {
 				htmlElement.classList.remove('dark');
 			}
-			themeToggleBtn.addEventListener('click', () => {
-				htmlElement.classList.toggle('dark');
-				if (htmlElement.classList.contains('dark')) {
-					localStorage.setItem('theme', 'dark');
-				} else {
-					localStorage.setItem('theme', 'light');
-				}
+			themeToggleBtns.forEach((btn) => {
+				btn.addEventListener('click', () => {
+					htmlElement.classList.toggle('dark');
+					if (htmlElement.classList.contains('dark')) {
+						localStorage.setItem('theme', 'dark');
+					} else {
+						localStorage.setItem('theme', 'light');
+					}
+				});
 			});
 		</script>
 	</body>

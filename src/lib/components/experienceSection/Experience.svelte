@@ -17,47 +17,47 @@
 			gradientFrom: 'from-primary',
 			gradientTo: 'to-accent-orange',
 			borderHover: 'hover:border-primary/30'
-		},
-		{
-			role: 'Web Developer',
-			company: 'Creative Pulse Agency',
-			period: '2020 - 2022',
-			description:
-				'Collaborated with designers and backend developers to deliver high-quality websites for diverse clients ranging from e-commerce brands to non-profits.',
-			highlights: [
-				'Developed 15+ custom WordPress themes and plugins',
-				'Integrated third-party APIs (Stripe, Mailchimp, Google Maps)',
-				'Ensured cross-browser compatibility and mobile responsiveness'
-			],
-			tags: ['JavaScript', 'WordPress', 'PHP'],
-			textColor: 'text-blue-500',
-			bgColor: 'bg-blue-500/5',
-			gradientFrom: 'from-blue-500',
-			gradientTo: 'to-blue-400',
-			borderHover: 'hover:border-blue-500/30'
-		},
-		{
-			role: 'Junior Developer',
-			company: 'StartUp Inc.',
-			period: '2018 - 2020',
-			description:
-				'Started as an intern and promoted to junior developer. Focused on maintenance, bug fixing, and implementing small features for the core product.',
-			highlights: [
-				'Assisted in the redesign of the company landing pages',
-				'Wrote unit tests achieving 85% code coverage for new modules'
-			],
-			tags: ['HTML/CSS', 'JavaScript', 'Git'],
-			textColor: 'text-green-500',
-			bgColor: 'bg-green-500/5',
-			gradientFrom: 'from-green-500',
-			gradientTo: 'to-green-400',
-			borderHover: 'hover:border-green-500/30'
 		}
+		// {
+		// 	role: 'Web Developer',
+		// 	company: 'Creative Pulse Agency',
+		// 	period: '2020 - 2022',
+		// 	description:
+		// 		'Collaborated with designers and backend developers to deliver high-quality websites for diverse clients ranging from e-commerce brands to non-profits.',
+		// 	highlights: [
+		// 		'Developed 15+ custom WordPress themes and plugins',
+		// 		'Integrated third-party APIs (Stripe, Mailchimp, Google Maps)',
+		// 		'Ensured cross-browser compatibility and mobile responsiveness'
+		// 	],
+		// 	tags: ['JavaScript', 'WordPress', 'PHP'],
+		// 	textColor: 'text-blue-500',
+		// 	bgColor: 'bg-blue-500/5',
+		// 	gradientFrom: 'from-blue-500',
+		// 	gradientTo: 'to-blue-400',
+		// 	borderHover: 'hover:border-blue-500/30'
+		// },
+		// {
+		// 	role: 'Junior Developer',
+		// 	company: 'StartUp Inc.',
+		// 	period: '2018 - 2020',
+		// 	description:
+		// 		'Started as an intern and promoted to junior developer. Focused on maintenance, bug fixing, and implementing small features for the core product.',
+		// 	highlights: [
+		// 		'Assisted in the redesign of the company landing pages',
+		// 		'Wrote unit tests achieving 85% code coverage for new modules'
+		// 	],
+		// 	tags: ['HTML/CSS', 'JavaScript', 'Git'],
+		// 	textColor: 'text-green-500',
+		// 	bgColor: 'bg-green-500/5',
+		// 	gradientFrom: 'from-green-500',
+		// 	gradientTo: 'to-green-400',
+		// 	borderHover: 'hover:border-green-500/30'
+		// }
 	];
 </script>
 
 <section
-	class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5"
+	class="scroll-section relative z-10 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5"
 	id="experience"
 >
 	<div class="absolute inset-0 z-0 bg-hero-glow-light dark:bg-hero-glow pointer-events-none"></div>
