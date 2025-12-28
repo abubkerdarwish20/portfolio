@@ -1,158 +1,126 @@
-<script lang="ts">
-	let name = $state('');
-	let email = $state('');
-	let message = $state('');
-	let errors = $state({ name: '', email: '', message: '' });
-	let isSubmitting = $state(false);
-
-	function validate() {
-		let isValid = true;
-		const newErrors = { name: '', email: '', message: '' };
-
-		if (!name.trim()) {
-			newErrors.name = 'Name is required';
-			isValid = false;
-		}
-
-		if (!email.trim()) {
-			newErrors.email = 'Email is required';
-			isValid = false;
-		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-			newErrors.email = 'Invalid email format';
-			isValid = false;
-		}
-
-		if (!message.trim()) {
-			newErrors.message = 'Message is required';
-			isValid = false;
-		}
-
-		errors = newErrors;
-		return isValid;
-	}
-
-	async function handleSubmit(e: Event) {
-		e.preventDefault();
-		if (!validate()) return;
-
-		isSubmitting = true;
-	}
-</script>
-
 <section
-	class="scroll-m-16 scroll-section relative z-10 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5"
+	class="relative z-10 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5 scroll-m-16 scroll-section"
 	id="contact"
 >
 	<div class="absolute inset-0 z-0 bg-hero-glow-light dark:bg-hero-glow pointer-events-none"></div>
 	<div
-		class="absolute left-[-10%] top-[20%] w-200 h-200 rounded-full border border-gray-200/40 dark:border-white/5 opacity-40 pointer-events-none"
+		class="absolute left-[-10%] top-[20%] w-[800px] h-[800px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-40 pointer-events-none"
 	></div>
 	<div
-		class="absolute left-[-5%] top-[25%] w-150 h-150 rounded-full border border-gray-200/40 dark:border-white/5 opacity-30 pointer-events-none"
+		class="absolute left-[-5%] top-[25%] w-[600px] h-[600px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-30 pointer-events-none"
 	></div>
 	<div
-		class="absolute left-[0%] top-[30%] w-100 h-100 rounded-full border border-gray-200/40 dark:border-white/5 opacity-20 pointer-events-none"
+		class="absolute left-[0%] top-[30%] w-[400px] h-[400px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-20 pointer-events-none"
 	></div>
 	<div
 		class="absolute left-[10%] top-[20%] w-24 h-24 rounded-2xl bg-linear-to-br from-primary to-accent-orange opacity-10 blur-2xl animate-float pointer-events-none"
 	></div>
 
-	<div class="max-w-6xl mx-auto relative z-10">
-		<div class="text-center mb-16 space-y-4">
-			<h5 class="text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">
-				Contact Me
-			</h5>
-			<h2 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
-				Request Free <span class="text-brand-primary">Consultancy</span>
-			</h2>
-		</div>
-
-		<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-			<div
-				class="lg:col-span-5 w-full bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 shadow-2xl rounded-2xl p-8 md:p-10 space-y-8"
-			>
-				<div class="space-y-2">
-					<h4
-						class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide"
+	<div class="max-w-7xl mx-auto relative z-10 px-4">
+		<div class="grid grid-cols-12 gap-12 items-start">
+			<div class="col-span-12 lg:col-span-6 xl:col-span-7 space-y-8 text-center lg:text-left">
+				<div class="space-y-4">
+					<span class="text-brand-primary font-semibold tracking-wider uppercase text-sm"
+						>Contact Me</span
 					>
-						Mobile
-					</h4>
-					<p class="text-3xl font-bold text-gray-900 dark:text-white">(+967) 7710 749 44</p>
+					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+						Let's <span class="text-brand-primary">Connect</span> &amp; Collaborate
+					</h2>
+					<p
+						class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-lg mx-auto lg:mx-0"
+					>
+						I'm currently available for freelance work and open to new opportunities. Whether you
+						have a question or just want to say hi, I'll try my best to get back to you!
+					</p>
 				</div>
-				<div class="space-y-4 pt-2">
-					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Address:</span>
-						<span class="text-gray-600 dark:text-gray-400 leading-relaxed"
-							>Yemen-Hadramout-Mukalla</span
-						>
-					</div>
-					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Email:</span>
-						<span class="text-gray-600 dark:text-gray-400">Abubker.darwish@gmail.com</span>
-					</div>
 
-					<div class="flex items-start gap-4">
-						<span class="font-bold text-gray-900 dark:text-white min-w-22.5">Work Hour:</span>
-						<span class="text-gray-600 dark:text-gray-400">Sun - Thu: 8:00 - 17:00</span>
-					</div>
+				<div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+					<a
+						class="group flex items-center gap-3 px-4 lg:px-8 py-4 lg:py-4 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-semibold text-base lg:text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1"
+						href="mailto:Abubker.darwish@gmail.com"
+					>
+						<span class="material-icons-outlined">email</span>
+						<span>Say Hello</span>
+					</a>
 				</div>
 			</div>
 
-			<div class="lg:col-span-7 w-full">
-				<form class="space-y-6" onsubmit={handleSubmit}>
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div class="space-y-2">
-							<input
-								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 {errors.name
-									? 'border-red-500'
-									: ''}"
-								id="name"
-								placeholder="Name*"
-								type="text"
-								bind:value={name}
-							/>
-							{#if errors.name}
-								<p class="text-red-500 text-sm ml-1">{errors.name}</p>
-							{/if}
+			<div
+				class="col-span-12 lg:col-span-6 xl:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6"
+			>
+				<div
+					class="group bg-white dark:bg-dark-card p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+				>
+					<div
+						class="absolute right-0 top-0 w-20 h-20 bg-primary/5 rounded-bl-full group-hover:bg-primary/10 transition-colors"
+					></div>
+					<div class="flex items-start gap-6 relative z-10">
+						<div
+							class="w-14 h-14 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-brand-primary flex items-center justify-center shrink-0"
+						>
+							<span class="material-icons-outlined text-2xl">mail</span>
 						</div>
-						<div class="space-y-2">
-							<input
-								class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 {errors.email
-									? 'border-red-500'
-									: ''}"
-								id="email"
-								placeholder="Email Address*"
-								type="email"
-								bind:value={email}
-							/>
-							{#if errors.email}
-								<p class="text-red-500 text-sm ml-1">{errors.email}</p>
-							{/if}
+						<div>
+							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Email</h4>
+							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
+								For general inquiries and projects
+							</p>
+							<a
+								class="text-lg font-medium text-gray-900 dark:text-white hover:text-brand-primary transition-colors break-all"
+								href="mailto:Abubker.darwish@gmail.com"
+							>
+								Abubker.darwish@gmail.com
+							</a>
 						</div>
 					</div>
+				</div>
 
-					<div class="space-y-2">
-						<textarea
-							class="w-full px-5 py-4 rounded-xl bg-gray-50 dark:bg-dark-card border border-gray-200 dark:border-white/10 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/20 outline-none transition-all text-gray-900 dark:text-white placeholder-gray-400 resize-none h-32 {errors.message
-								? 'border-red-500'
-								: ''}"
-							id="message"
-							placeholder="How can we help you?"
-							bind:value={message}
-						></textarea>
-						{#if errors.message}
-							<p class="text-red-500 text-sm ml-1">{errors.message}</p>
-						{/if}
+				<div
+					class="group bg-white dark:bg-dark-card p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+				>
+					<div
+						class="absolute right-0 top-0 w-20 h-20 bg-blue-50 dark:bg-blue-900/10 rounded-bl-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900/20 transition-colors"
+					></div>
+					<div class="flex items-start gap-6 relative z-10">
+						<div
+							class="w-14 h-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center shrink-0"
+						>
+							<span class="material-icons-outlined text-2xl">call</span>
+						</div>
+						<div>
+							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Phone</h4>
+							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Sun - Thu: 8:00 - 17:00</p>
+							<a
+								class="text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 transition-colors"
+								href="tel:+967771074944"
+							>
+								(+967) 7710 749 44
+							</a>
+						</div>
 					</div>
+				</div>
 
-					<button
-						class="w-full cursor-pointer sm:w-auto px-10 py-3 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-bold text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-70 disabled:cursor-not-allowed"
-						type="submit"
-						disabled={isSubmitting}
-					>
-						{isSubmitting ? 'Sending...' : 'Request Now'}
-					</button>
-				</form>
+				<div
+					class="group bg-white dark:bg-dark-card p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+				>
+					<div
+						class="absolute right-0 top-0 w-20 h-20 bg-green-50 dark:bg-green-900/10 rounded-bl-full group-hover:bg-green-100 dark:group-hover:bg-green-900/20 transition-colors"
+					></div>
+					<div class="flex items-start gap-6 relative z-10">
+						<div
+							class="w-14 h-14 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-500 flex items-center justify-center shrink-0"
+						>
+							<span class="material-icons-outlined text-2xl">location_on</span>
+						</div>
+						<div>
+							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Location</h4>
+							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">My Address</p>
+							<span class="text-lg font-medium text-gray-900 dark:text-white block">
+								Yemen-Hadramout-Mukalla
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

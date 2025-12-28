@@ -1,58 +1,24 @@
 <script lang="ts">
 	const experiences = [
 		{
-			role: 'Senior Frontend Dev',
-			company: 'TechFlow Systems',
-			period: '2022 - Present',
+			role: 'Front-end Engineer',
+			company: 'Jisr HR',
+			period: 'May 2019 - Present',
 			description:
-				"Leading the frontend team in rebuilding the company's flagship SaaS product. Implemented a modern component library using React and Tailwind CSS, resulting in a 40% reduction in development time for new features.",
+				'Led a team of developers in designing and implementing highly scalable and performant web applications using React.js. Developing and maintaining core product services while ensuring high-quality software solutions.',
 			highlights: [
-				'Spearheaded migration from legacy jQuery codebase to Next.js',
-				'Mentored 3 junior developers and established code review guidelines',
-				'Optimized application performance, improving Core Web Vitals scores by 25 points'
+				'Developed and maintained reusable components and libraries for efficient UI implementation.',
+				'Implemented responsive designs and optimized applications for multiple devices and screen sizes.',
+				'Collaborated closely with product managers and designers to translate business requirements into technical specifications.',
+				'Mentored junior developers through guidance, knowledge-sharing, and React.js workshops.'
 			],
-			tags: ['React', 'Next.js', 'TypeScript'],
-			textColor: 'text-primary',
-			bgColor: 'bg-primary/5',
-			gradientFrom: 'from-primary',
+			tags: ['Reactjs', 'TypeScript', 'Redux', 'Node.js', 'Cypress', 'Vitest', 'Vite'],
+			textColor: 'text-brand-primary',
+			bgColor: 'bg-brand-primary/5',
+			gradientFrom: 'from-brand-primary',
 			gradientTo: 'to-accent-orange',
-			borderHover: 'hover:border-primary/30'
+			borderHover: 'hover:border-brand-primary/30'
 		}
-		// {
-		// 	role: 'Web Developer',
-		// 	company: 'Creative Pulse Agency',
-		// 	period: '2020 - 2022',
-		// 	description:
-		// 		'Collaborated with designers and backend developers to deliver high-quality websites for diverse clients ranging from e-commerce brands to non-profits.',
-		// 	highlights: [
-		// 		'Developed 15+ custom WordPress themes and plugins',
-		// 		'Integrated third-party APIs (Stripe, Mailchimp, Google Maps)',
-		// 		'Ensured cross-browser compatibility and mobile responsiveness'
-		// 	],
-		// 	tags: ['JavaScript', 'WordPress', 'PHP'],
-		// 	textColor: 'text-blue-500',
-		// 	bgColor: 'bg-blue-500/5',
-		// 	gradientFrom: 'from-blue-500',
-		// 	gradientTo: 'to-blue-400',
-		// 	borderHover: 'hover:border-blue-500/30'
-		// },
-		// {
-		// 	role: 'Junior Developer',
-		// 	company: 'StartUp Inc.',
-		// 	period: '2018 - 2020',
-		// 	description:
-		// 		'Started as an intern and promoted to junior developer. Focused on maintenance, bug fixing, and implementing small features for the core product.',
-		// 	highlights: [
-		// 		'Assisted in the redesign of the company landing pages',
-		// 		'Wrote unit tests achieving 85% code coverage for new modules'
-		// 	],
-		// 	tags: ['HTML/CSS', 'JavaScript', 'Git'],
-		// 	textColor: 'text-green-500',
-		// 	bgColor: 'bg-green-500/5',
-		// 	gradientFrom: 'from-green-500',
-		// 	gradientTo: 'to-green-400',
-		// 	borderHover: 'hover:border-green-500/30'
-		// }
 	];
 </script>
 
