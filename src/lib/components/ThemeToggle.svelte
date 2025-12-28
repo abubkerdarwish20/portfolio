@@ -28,7 +28,7 @@
 
 <button
 	onclick={toggleTheme}
-	class="cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
+	class="h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm backdrop-blur-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
 	aria-label="Toggle dark mode"
 >
 	{#if isDark}

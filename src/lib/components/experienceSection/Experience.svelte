@@ -1,8 +1,9 @@
 <script lang="ts">
 	const experiences = [
 		{
-			role: 'Front-end Engineer',
+			role: 'Senior Front-end Developer',
 			company: 'Jisr HR',
+			link: 'https://www.jisr.net/en',
 			period: 'May 2019 - Present',
 			description:
 				'Led a team of developers in designing and implementing highly scalable and performant web applications using React.js. Developing and maintaining core product services while ensuring high-quality software solutions.',
@@ -18,6 +19,23 @@
 			gradientFrom: 'from-brand-primary',
 			gradientTo: 'to-accent-orange',
 			borderHover: 'hover:border-brand-primary/30'
+		},
+		{
+			role: 'Front-end Engineer',
+			company: 'Resal',
+			link: 'https://resal.me/en/',
+			period: 'April 2023 - August 2023',
+			description: 'Working as part time for Resal company as Front-end Engineer.',
+			highlights: [
+				'Working as part time for Resal company as Front-end Engineer.',
+				'Implemented responsive designs and optimized applications for multiple devices and screen sizes.'
+			],
+			tags: ['Reactjs', 'TypeScript', 'Nextjs', 'Node.js', 'Docker', 'Tailwind', 'Vite'],
+			textColor: 'text-blue-500',
+			bgColor: 'bg-blue-500/5',
+			gradientFrom: 'from-blue-500',
+			gradientTo: 'to-blue-900',
+			borderHover: 'hover:border-blue-500/30'
 		}
 	];
 </script>
@@ -60,10 +78,17 @@
 					></div>
 
 					<div
-						class="md:w-1/4 flex flex-col items-start md:border-r md:border-gray-100 dark:md:border-white/5 pr-4"
+						class="md:w-1/3 flex flex-col items-start md:border-r md:border-gray-100 dark:md:border-white/5 pr-4"
 					>
 						<h4 class="text-lg font-bold text-gray-900 dark:text-white">{exp.role}</h4>
-						<span class="text-sm font-medium {exp.textColor} mt-1">{exp.company}</span>
+						<a
+							href={exp.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-sm font-medium {exp.textColor} mt-1"
+						>
+							{exp.company}
+						</a>
 						<div
 							class="mt-4 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-white/5"
 						>
@@ -72,7 +97,7 @@
 						</div>
 					</div>
 
-					<div class="md:w-3/4 space-y-3">
+					<div class="md:w-2/3 space-y-3">
 						<p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
 							{exp.description}
 						</p>
