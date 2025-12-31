@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { Sun02Icon, Moon02Icon } from '@hugeicons/core-free-icons';
 
 	let isDark = $state(false);
 
@@ -32,8 +34,8 @@
 	aria-label="Toggle dark mode"
 >
 	{#if isDark}
-		<span class="material-icons-outlined text-xl">light_mode</span>
+		<HugeiconsIcon icon={Sun02Icon} size={20} />
 	{:else}
-		<span class="material-icons-outlined text-xl">dark_mode</span>
+		<HugeiconsIcon icon={Moon02Icon} size={20} />
 	{/if}
 </button>

@@ -1,4 +1,14 @@
 <script lang="ts">
+	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import {
+		ChefHatIcon,
+		ShoppingBag01Icon,
+		DashboardSquare01Icon,
+		Film01Icon,
+		CodeIcon,
+		ArrowUpRight01Icon
+	} from '@hugeicons/core-free-icons';
+
 	const projects = [
 		{
 			title: 'Recipe Finder',
@@ -6,7 +16,7 @@
 			description:
 				'Search and discover recipes from around the world. Save favorites and get detailed cooking instructions in a beautiful, responsive interface.',
 			tags: ['React', 'TailwindCSS', 'API Integration'],
-			icon: 'restaurant_menu',
+			icon: ChefHatIcon,
 			accent: 'brand-primary',
 			github: '#',
 			live: '#'
@@ -17,7 +27,7 @@
 			description:
 				'A full-featured e-commerce platform with cart functionality, user authentication, and stripe payment integration designed for high conversion.',
 			tags: ['Next.js', 'Stripe', 'TypeScript'],
-			icon: 'shopping_bag',
+			icon: ShoppingBag01Icon,
 			accent: 'blue-500',
 			github: '#',
 			live: '#'
@@ -28,7 +38,7 @@
 			description:
 				'A comprehensive analytics dashboard for SaaS businesses, featuring data visualization charts, real-time updates, and reporting tools.',
 			tags: ['Vue.js', 'Chart.js', 'Firebase'],
-			icon: 'dashboard',
+			icon: DashboardSquare01Icon,
 			accent: 'green-500',
 			github: '#',
 			live: '#'
@@ -39,7 +49,7 @@
 			description:
 				'A movie and TV show discovery app using the TMDB API. Browse trending content, watch trailers, and manage your watchlist effortlessly.',
 			tags: ['React Native', 'Redux', 'API'],
-			icon: 'movie',
+			icon: Film01Icon,
 			accent: 'purple-500',
 			github: '#',
 			live: '#'
@@ -76,11 +86,11 @@
 							<div
 								class="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
 							></div>
-							<span
-								class="material-icons-outlined text-6xl text-gray-300 dark:text-gray-700 group-hover:text-brand-primary/50 transition-colors duration-300 transform group-hover:scale-110"
-							>
-								{project.icon}
-							</span>
+							<HugeiconsIcon
+								icon={project.icon}
+								size={64}
+								className="text-gray-300 dark:text-gray-700 group-hover:text-brand-primary/50 transition-colors duration-300 transform group-hover:scale-110"
+							/>
 						</div>
 
 						<div class="w-full xl:w-1/2 flex flex-col justify-between space-y-4">
@@ -115,14 +125,14 @@
 									class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-semibold hover:bg-brand-primary dark:hover:bg-brand-primary hover:text-white dark:hover:text-white transition-all shadow-lg shadow-gray-200 dark:shadow-none"
 									href={project.github}
 								>
-									<span class="material-icons-outlined text-lg">code</span>
+									<HugeiconsIcon icon={CodeIcon} size={18} />
 									Github Repo
 								</a>
 								<a
 									class="flex items-center gap-2 px-4 py-2.5 rounded-full text-gray-600 dark:text-gray-300 text-sm font-medium hover:text-brand-primary dark:hover:text-brand-primary transition-colors"
 									href={project.live}
 								>
-									<span class="material-icons-outlined text-lg">open_in_new</span>
+									<HugeiconsIcon icon={ArrowUpRight01Icon} size={18} />
 									Live Demo
 								</a>
 							</div>

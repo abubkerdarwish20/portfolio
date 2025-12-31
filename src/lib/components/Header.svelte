@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
+	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { Download01Icon, Menu01Icon, Cancel01Icon } from '@hugeicons/core-free-icons';
 
 	let isMenuOpen = $state(false);
 	let activeSection = $state('home');
@@ -63,7 +65,7 @@
 					href="/abubker-darwish-cv.pdf"
 					download="abubker-darwish-cv.pdf"
 				>
-					<span class="material-icons-outlined text-white transition-colors">download</span>
+					<HugeiconsIcon icon={Download01Icon} size={18} className="text-white transition-colors" />
 					<span class="text-sm font-medium text-white transition-colors">Download Resume</span>
 				</a>
 				<ThemeToggle />
@@ -74,9 +76,11 @@
 				class="md:hidden h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
 				aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 			>
-				<span class="material-icons-outlined text-3xl" aria-hidden="true"
-					>{isMenuOpen ? 'close' : 'menu'}</span
-				>
+				{#if isMenuOpen}
+					<HugeiconsIcon icon={Cancel01Icon} size={24} />
+				{:else}
+					<HugeiconsIcon icon={Menu01Icon} size={24} />
+				{/if}
 			</button>
 		</div>
 	</nav>

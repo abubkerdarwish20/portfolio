@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { HugeiconsIcon } from '@hugeicons/svelte';
+	import { Calendar01Icon, CheckmarkCircle01Icon } from '@hugeicons/core-free-icons';
 	const experiences = [
 		{
 			role: 'Senior Front-end Developer',
@@ -94,7 +96,7 @@
 						<div
 							class="mt-4 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-white/5 px-3 py-1.5 rounded-full border border-gray-100 dark:border-white/5"
 						>
-							<span class="material-icons-outlined text-sm">calendar_today</span>
+							<HugeiconsIcon className="shrink-0" icon={Calendar01Icon} size={14} />
 							{exp.period}
 						</div>
 					</div>
@@ -106,9 +108,11 @@
 						<ul class="space-y-2 mt-2">
 							{#each exp.highlights as highlight (highlight)}
 								<li class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
-									<span class="material-icons-outlined {exp.textColor} text-lg mt-0.5"
-										>check_circle</span
-									>
+									<HugeiconsIcon
+										icon={CheckmarkCircle01Icon}
+										size={18}
+										className="{exp.textColor} mt-0.5 shrink-0"
+									/>
 									<span>{highlight}</span>
 								</li>
 							{/each}

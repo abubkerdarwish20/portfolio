@@ -12,7 +12,6 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@lucide/svelte": "^0.562.0",
 		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/eslint-config": "^8.3.4",
 		"@sveltejs/kit": "^2.49.1",
@@ -46,5 +45,9 @@
 		"*.{json,md,css}": [
 			"prettier --write"
 		]
+	},
+	"dependencies": {
+		"@hugeicons/core-free-icons": "^3.1.1",
+		"@hugeicons/svelte": "^1.0.3"
 	}
 }
