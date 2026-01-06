@@ -25,7 +25,7 @@
 				<a
 					aria-label="GitHub"
 					class="group p-2 rounded-full border border-white/20 hover:border-white hover:bg-white/10 transition-all duration-300"
-					href="https://github.com/abubkerdarwish20"
+					href="https://github.com/Abubker-Darwish"
 					target="_blank"
 					rel="noopener noreferrer"
 				>

@@ -19,11 +19,11 @@
 		{
 			id: 1,
 			content:
-				"Abubker's ability to translate our vision into a stunning website was incredible. His attention to detail and technical skills are top-notch. Highly recommended!",
-			author: 'Carolina Abott',
-			role: 'Business Owner',
-			avatar:
-				'https://lh3.googleusercontent.com/aida-public/AB6AXuA0Ke7AK9UIRfAjHuMa9utC_y-tqqLBTboTWikqSnjr7SUoSlIyAaDQrwXHQc8uJ5Xh99IwclUOxZSvGiKbXUt8frjG4aCVZOFI-12Ys-1FA-XMJdfUtd4LF76MGjdStm0nonAupAczN2ATMQJfxzggeBNOoOZHZqMtVY7sPBpjhmOEaEVmKI6RWDd1OH9zr0QUDKla3VxjcG9BiOBDEJYnm00S5AMaCiQVvnlaOqXZw9OSxXGnAQaLGTmzag0wUHiblQIpYY4jIoQ'
+				'A highly accomplished Senior Developer with excellent technical judgment and a deep understanding of modern development practices. He consistently delivers scalable, well-architected solutions while maintaining a strong focus on business requirements and user experience. He goes beyond implementation to improve performance, code quality, and overall product value.',
+			author: 'Ahmed Ba Haggag',
+			role: 'Team Lead Engineer at Jisr',
+			link: 'https://www.linkedin.com/in/ahmedbahaggag/',
+			avatar: 'https://ca.slack-edge.com/T9VCZ4Q69-UADMVUCTZ-ce23b9c589c7-512'
 		},
 		{
 			id: 2,
@@ -40,7 +40,7 @@
 	onMount(() => {
 		const interval = setInterval(() => {
 			activeIndex = (activeIndex + 1) % cards.length;
-		}, 4000);
+		}, 6000);
 		return () => clearInterval(interval);
 	});
 </script>
@@ -100,25 +100,26 @@
 			class="bg-brand-primary shadow-brand-primary/20 hover:bg-orange-700 transform rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1"
 			href="#contact"
 		>
-			Hire me
+			Contact me
 		</a>
 	</div>
 
 	<div
-		class="relative mt-12 hidden h-48 w-full max-w-md sm:block transition-all duration-1000 delay-1900 {mounted
+		class="relative mt-12 hidden w-full max-w-md sm:grid grid-cols-1 grid-rows-1 transition-all duration-1000 delay-1900 {mounted
 			? 'translate-y-0 opacity-100'
 			: 'translate-y-8 opacity-0'}"
 	>
 		{#each cards as card, i (card.id)}
 			{@const isActive = i === activeIndex}
 			<div
-				class="glass-card absolute inset-0 rounded-2xl p-6 shadow-md transition-all duration-700 transform"
+				class="glass-card col-start-1 row-start-1 rounded-2xl p-6 shadow-md transition-all duration-1000 transform"
 				class:z-20={isActive}
 				class:opacity-100={isActive}
 				class:translate-y-0={isActive}
 				class:scale-100={isActive}
 				class:z-10={!isActive}
-				class:opacity-40={!isActive}
+				class:opacity-0={!isActive}
+				class:pointer-events-none={!isActive}
 				class:translate-y-8={!isActive}
 				class:scale-95={!isActive}
 			>
@@ -126,18 +127,23 @@
 					class="text-brand-primary absolute top-4 left-4 font-serif text-6xl leading-none opacity-20"
 					>“</span
 				>
-				<div class="relative z-10 space-y-4 pl-2">
-					<p class="pt-2 text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
+				<div class="h-full relative z-10 space-y-4 pl-2 flex flex-col justify-between">
+					<p class="flex-1 pt-2 text-sm italic leading-relaxed text-gray-600 dark:text-gray-300">
 						{card.content}
 					</p>
-					<div class="flex items-center gap-3 pt-2">
+					<div class="flex items-center gap-3 pt-2 mt-auto">
 						<img
 							alt={card.author}
 							class="border-brand-primary/30 h-10 w-10 rounded-full border-2 object-cover"
 							src={card.avatar}
 						/>
 						<div>
-							<h4 class="text-sm font-semibold text-gray-900 dark:text-white">{card.author}</h4>
+							<a
+								href={card.link}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="text-sm font-semibold text-gray-900 dark:text-white">{card.author}</a
+							>
 							<p class="text-xs text-gray-500 dark:text-gray-400">{card.role}</p>
 						</div>
 					</div>

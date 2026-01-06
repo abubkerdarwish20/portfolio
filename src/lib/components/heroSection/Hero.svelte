@@ -138,8 +138,8 @@
 	<div class="absolute bottom-10 left-6 z-20 hidden flex-col items-center gap-6 xl:flex">
 		<div class="from-transparent to-gray-400 h-20 w-px bg-linear-to-b dark:to-gray-600"></div>
 		<a
-			class="hover:text-brand-primary text-gray-400 transition-colors transform hover:-translate-y-1"
-			href="https://github.com/abubkerdarwish20"
+			class="hover:text-brand-primary text-gray-400 transition-[colors, transform] duration-300 ease-in-out transform hover:-translate-y-1"
+			href="https://github.com/Abubker-Darwish"
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="GitHub Profile"
@@ -147,7 +147,7 @@
 			<HugeiconsIcon icon={GithubIcon} size={20} />
 		</a>
 		<a
-			class="hover:text-brand-primary text-gray-400 transition-colors transform hover:-translate-y-1"
+			class="hover:text-brand-primary text-gray-400 transition-[colors, transform] duration-300 ease-in-out transform hover:-translate-y-1"
 			href="https://www.linkedin.com/in/abubker-darwish/"
 			target="_blank"
 			rel="noopener noreferrer"
@@ -156,7 +156,7 @@
 			<HugeiconsIcon icon={Linkedin01Icon} size={20} />
 		</a>
 		<a
-			class="hover:text-brand-primary text-gray-400 transition-colors transform hover:-translate-y-1"
+			class="hover:text-brand-primary text-gray-400 transition-[colors, transform] duration-300 ease-in-out transform hover:-translate-y-1"
 			href="mailto:abubker.darwish@gmail.com"
 			aria-label="Email"
 		>
