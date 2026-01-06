@@ -47,10 +47,10 @@
 
 <div class="flex flex-col items-start space-y-8">
 	<div class="space-y-4">
-		<p class="h-7 flex flex-wrap gap-x-[0.3em] text-lg font-medium tracking-wide sm:text-xl">
+		<p class="h-7 flex flex-wrap gap-x-[0.3em] text-lg font-medium tracking-wide md:text-xl">
 			{#each introWords as { word, i } (i)}
 				<span
-					class="inline-block transition-all duration-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
+					class="inline-block transition-[color, transform] duration-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
 						? 'translate-y-0 opacity-100'
 						: 'translate-y-4 opacity-0'}"
 					style="transition-delay: {i * 100}ms"
@@ -64,25 +64,25 @@
 			{/each}
 		</p>
 
-		<h1 class="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+		<h1 class="font-bold leading-[1.1] tracking-tight text-2xl sm:text-4xl lg:text-5xl">
 			<span
-				class="inline-block transition-all duration-1000 delay-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
+				class="inline-block transition-[color, transform] duration-1000 delay-700 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-900 dark:from-white dark:to-white {mounted
 					? 'translate-y-0 opacity-100'
 					: 'translate-y-8 opacity-0'}"
 			>
-				Frontend
+				Senior Frontend
 			</span>
 			<span
-				class="inline-block transition-all duration-1000 delay-1000 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 {mounted
+				class="inline-block transition-[color, transform] duration-1000 delay-1000 bg-clip-text text-transparent bg-linear-to-r from-gray-900 to-gray-500 dark:from-white dark:to-gray-400 {mounted
 					? 'translate-y-0 opacity-100'
 					: 'translate-y-8 opacity-0'}"
 			>
-				Developer
+				Engineer
 			</span>
 		</h1>
 
 		<p
-			class="max-w-lg text-base leading-relaxed text-gray-600 transition-all duration-1000 delay-1300 md:text-lg dark:text-gray-400 {mounted
+			class="max-w-lg text-base leading-relaxed text-gray-600 transition-[color, transform] duration-1000 delay-1300 md:text-lg dark:text-gray-400 {mounted
 				? 'translate-y-0 opacity-100'
 				: 'translate-y-4 opacity-0'}"
 		>
@@ -92,12 +92,12 @@
 	</div>
 
 	<div
-		class="flex items-center gap-4 transition-all duration-1000 delay-1600 {mounted
+		class="flex items-center gap-4 transition-[color, transform] duration-1000 delay-1600 {mounted
 			? 'translate-y-0 opacity-100'
 			: 'translate-y-4 opacity-0'}"
 	>
 		<a
-			class="bg-brand-primary shadow-brand-primary/20 hover:bg-orange-700 transform rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1"
+			class="bg-brand-primary shadow-brand-primary/20 hover:bg-orange-700 transform rounded-full px-8 py-4 text-lg font-semibold text-white shadow-lg transition-[color, transform] duration-300 hover:-translate-y-1"
 			href="#contact"
 		>
 			Contact me
@@ -105,14 +105,14 @@
 	</div>
 
 	<div
-		class="relative mt-12 hidden w-full max-w-md sm:grid grid-cols-1 grid-rows-1 transition-all duration-1000 delay-1900 {mounted
+		class="relative mt-12 hidden w-full max-w-md sm:grid grid-cols-1 grid-rows-1 transition-[color, transform] duration-1000 delay-1900 {mounted
 			? 'translate-y-0 opacity-100'
 			: 'translate-y-8 opacity-0'}"
 	>
 		{#each cards as card, i (card.id)}
 			{@const isActive = i === activeIndex}
 			<div
-				class="glass-card col-start-1 row-start-1 rounded-2xl p-6 shadow-md transition-all duration-1000 transform"
+				class="glass-card col-start-1 row-start-1 rounded-2xl p-6 shadow-md transition-[color, transform] duration-1000 transform"
 				class:z-20={isActive}
 				class:opacity-100={isActive}
 				class:translate-y-0={isActive}
