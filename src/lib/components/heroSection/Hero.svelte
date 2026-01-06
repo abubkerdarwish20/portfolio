@@ -139,7 +139,7 @@
 		<div class="from-transparent to-gray-400 h-20 w-px bg-linear-to-b dark:to-gray-600"></div>
 		<a
 			class="hover:text-brand-primary text-gray-400 transition-[colors, transform] duration-300 ease-in-out transform hover:-translate-y-1"
-			href="https://github.com/Abubker-Darwish"
+			href="https://github.com/abubkerdarwish20"
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label="GitHub Profile"
