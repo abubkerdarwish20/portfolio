@@ -11,7 +11,7 @@
 		{ label: 'Home', href: '#home', id: 'home' },
 		{ label: 'Skills', href: '#skills', id: 'skills' },
 		{ label: 'Experience', href: '#experience', id: 'experience' },
-		// { label: 'Projects', href: '#projects', id: 'projects' },
+		{ label: 'Projects', href: '#projects', id: 'projects' },
 		{ label: 'Connect', href: '#contact', id: 'contact' }
 	];
 
@@ -43,11 +43,11 @@
 	>
 		<a
 			href="/"
-			class="flex items-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+			class="flex items-center text-base md:text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
 		>
 			Abubker<span class="text-brand-primary">.</span>
 		</a>
-		<div class="hidden items-center gap-1 p-1.5 md:flex">
+		<div class="hidden items-center gap-1 p-1.5 lg:flex">
 			{#each navItems as item (item.id)}
 				<a
 					class="rounded-full px-6 py-2 text-sm font-medium transition-all {activeSection ===
@@ -73,7 +73,7 @@
 
 			<button
 				onclick={() => (isMenuOpen = !isMenuOpen)}
-				class="md:hidden h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
+				class="lg:hidden h-9 w-9 cursor-pointer flex items-center justify-center rounded-full border border-gray-200 bg-white/80 p-2 text-gray-800 shadow-sm transition-transform hover:scale-105 dark:border-white/10 dark:bg-black/40 dark:text-white"
 				aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
 			>
 				{#if isMenuOpen}
@@ -87,7 +87,7 @@
 
 	{#if isMenuOpen}
 		<div
-			class="glass-nav absolute top-24 left-4 right-4 flex flex-col gap-4 rounded-2xl p-6 shadow-xl md:hidden dark:bg-black/80"
+			class="glass-nav absolute top-24 left-4 right-4 flex flex-col gap-4 rounded-2xl p-6 shadow-xl lg:hidden dark:bg-black/80"
 		>
 			{#each navItems as item (item.id)}
 				<a

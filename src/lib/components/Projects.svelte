@@ -1,60 +1,34 @@
 <script lang="ts">
 	import { HugeiconsIcon } from '@hugeicons/svelte';
 	import {
-		ChefHatIcon,
-		ShoppingBag01Icon,
-		DashboardSquare01Icon,
-		Film01Icon,
-		CodeIcon,
-		ArrowUpRight01Icon,
+		GithubIcon,
 		ArrowLeft01Icon,
-		ArrowRight01Icon
+		ArrowRight01Icon,
+		LiveStreaming02Icon
 	} from '@hugeicons/core-free-icons';
 
 	const projects = [
 		{
-			title: 'Recipe Finder',
-			category: 'Web Application',
+			title: 'React DS',
+			category: 'React Package',
 			description:
-				'Search and discover recipes from around the world. Save favorites and get detailed cooking instructions in a beautiful, responsive interface.',
-			tags: ['React', 'TailwindCSS', 'API Integration'],
-			icon: ChefHatIcon,
+				'A modern, lightweight design system for React applications, featuring customizable components and Tailwind CSS integration.',
+			tags: ['React', 'TailwindCSS', 'storybook', 'TypeScript'],
+			image: '/ds.png',
 			accent: 'brand-primary',
-			github: '#',
-			live: '#'
+			github: 'https://github.com/abubkerdarwish20/react-ds',
+			live: 'https://react-ds-001.netlify.app/'
 		},
 		{
-			title: 'Modern Shop',
-			category: 'E-Commerce',
+			title: 'Image Bluray',
+			category: 'Next.js App',
 			description:
-				'A full-featured e-commerce platform with cart functionality, user authentication, and stripe payment integration designed for high conversion.',
+				'An ultra-fast image gallery built with Next.js and Unsplash API, featuring intelligent blurring and stripe integration.',
 			tags: ['Next.js', 'Stripe', 'TypeScript'],
-			icon: ShoppingBag01Icon,
+			image: '/upslashy.png',
 			accent: 'blue-500',
-			github: '#',
-			live: '#'
-		},
-		{
-			title: 'Analytics Pro',
-			category: 'SaaS Dashboard',
-			description:
-				'A comprehensive analytics dashboard for SaaS businesses, featuring data visualization charts, real-time updates, and reporting tools.',
-			tags: ['Vue.js', 'Chart.js', 'Firebase'],
-			icon: DashboardSquare01Icon,
-			accent: 'green-500',
-			github: '#',
-			live: '#'
-		},
-		{
-			title: 'StreamHub',
-			category: 'Entertainment',
-			description:
-				'A movie and TV show discovery app using the TMDB API. Browse trending content, watch trailers, and manage your watchlist effortlessly.',
-			tags: ['React Native', 'Redux', 'API'],
-			icon: Film01Icon,
-			accent: 'purple-500',
-			github: '#',
-			live: '#'
+			github: 'https://github.com/abubkerdarwish20/image-bluray',
+			live: 'https://image-bluray.netlify.app/'
 		}
 	];
 
@@ -93,8 +67,8 @@
 			<!-- Slider -->
 			<div class="overflow-visible px-4 sm:px-0">
 				<div
-					class="flex gap-6 lg:gap-8 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
-					style="transform: translateX(calc(-{currentIndex} * (min(100%, 700px) + 2rem)))"
+					class="flex carousel-slider transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+					style="transform: translateX(calc(-{currentIndex} * (var(--card-width) + var(--card-gap))))"
 				>
 					{#each projects as project, i (project.title)}
 						<div
@@ -110,14 +84,14 @@
 									<div
 										class="absolute inset-0 bg-linear-to-br from-brand-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
 									></div>
-									<HugeiconsIcon
-										icon={project.icon}
-										size={80}
-										className="text-gray-300 dark:text-gray-700 group-hover:text-brand-primary/50 transition-colors duration-300 transform group-hover:scale-110"
+									<img
+										src={project.image}
+										alt={project.title}
+										class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
 									/>
 								</div>
 
-								<div class="w-full xl:w-1/2 flex flex-col justify-between py-2">
+								<div class="w-full xl:w-1/2 flex flex-col justify-between">
 									<div class="space-y-4">
 										<div>
 											<span
@@ -132,6 +106,7 @@
 												{project.title}
 											</h3>
 										</div>
+
 										<p class="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
 											{project.description}
 										</p>
@@ -150,15 +125,17 @@
 										<a
 											class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-sm font-bold hover:bg-brand-primary dark:hover:bg-brand-primary hover:text-white dark:hover:text-white transition-all shadow-lg shadow-gray-200 dark:shadow-none"
 											href={project.github}
+											target="_blank"
 										>
-											<HugeiconsIcon icon={CodeIcon} size={20} />
+											<HugeiconsIcon icon={GithubIcon} size={20} />
 											Github
 										</a>
 										<a
 											class="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 text-sm font-bold hover:bg-gray-50 dark:hover:bg-white/5 hover:text-brand-primary dark:hover:text-brand-primary transition-all"
 											href={project.live}
+											target="_blank"
 										>
-											<HugeiconsIcon icon={ArrowUpRight01Icon} size={20} />
+											<HugeiconsIcon icon={LiveStreaming02Icon} size={20} />
 											Demo
 										</a>
 									</div>
@@ -174,14 +151,14 @@
 				<div class="flex gap-4">
 					<button
 						on:click={prev}
-						class="p-4 rounded-full bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-primary hover:border-brand-primary/30 transition-all shadow-lg shadow-gray-100 dark:shadow-none active:scale-95"
+						class="cursor-pointer p-4 rounded-full bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-primary hover:border-brand-primary/30 transition-all shadow-lg shadow-gray-100 dark:shadow-none active:scale-95"
 						aria-label="Previous project"
 					>
 						<HugeiconsIcon icon={ArrowLeft01Icon} size={24} />
 					</button>
 					<button
 						on:click={next}
-						class="p-4 rounded-full bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-primary hover:border-brand-primary/30 transition-all shadow-lg shadow-gray-100 dark:shadow-none active:scale-95"
+						class="cursor-pointer p-4 rounded-full bg-white dark:bg-dark-card border border-gray-100 dark:border-white/5 text-gray-600 dark:text-gray-400 hover:text-brand-primary dark:hover:text-brand-primary hover:border-brand-primary/30 transition-all shadow-lg shadow-gray-100 dark:shadow-none active:scale-95"
 						aria-label="Next project"
 					>
 						<HugeiconsIcon icon={ArrowRight01Icon} size={24} />
@@ -193,7 +170,7 @@
 					{#each projects as project, i (project.title)}
 						<button
 							on:click={() => goTo(i)}
-							class="h-2 transition-all duration-300 rounded-full {currentIndex === i
+							class="cursor-pointer h-2 transition-all duration-300 rounded-full {currentIndex === i
 								? 'w-12 bg-brand-primary'
 								: 'w-2 bg-gray-300 dark:bg-white/10 hover:bg-brand-primary/40'}"
 							aria-label="Go to project {i + 1}"
@@ -213,5 +190,30 @@
 	}
 	div::-webkit-scrollbar {
 		display: none;
+	}
+
+	.carousel-slider {
+		--card-width: 100%;
+		--card-gap: 1.5rem;
+		gap: var(--card-gap);
+	}
+
+	@media (min-width: 640px) {
+		.carousel-slider {
+			--card-width: 500px;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.carousel-slider {
+			--card-width: 600px;
+			--card-gap: 2rem;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.carousel-slider {
+			--card-width: 700px;
+		}
 	}
 </style>

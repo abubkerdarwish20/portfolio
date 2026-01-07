@@ -4,7 +4,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import Hero from '$lib/components/heroSection/Hero.svelte';
 	import Experience from '$lib/components/experienceSection/Experience.svelte';
-	// import Projects from '$lib/components/Projects.svelte';
+	import Projects from '$lib/components/Projects.svelte';
 	import Skills from '$lib/components/techSection/Skills.svelte';
 </script>
 
@@ -57,7 +57,7 @@
 	<Hero />
 	<Skills />
 	<Experience />
-	<!-- <Projects /> -->
+	<Projects />
 	<Contact />
 </main>
 <Footer />
