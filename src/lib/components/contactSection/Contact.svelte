@@ -1,136 +1,389 @@
 <script lang="ts">
+	import SectionBackdrop from '$lib/components/SectionBackdrop.svelte';
+	import { fly } from 'svelte/transition';
+	import { expoOut } from 'svelte/easing';
 	import { HugeiconsIcon } from '@hugeicons/svelte';
-	import { Mail01Icon, CallIcon, Location01Icon } from '@hugeicons/core-free-icons';
+	import {
+		Mail01Icon,
+		Copy01Icon,
+		CallIcon,
+		GithubIcon,
+		Linkedin01Icon,
+		Download01Icon,
+		Search01Icon,
+		CheckmarkCircle01Icon
+	} from '@hugeicons/core-free-icons';
+	import { inview } from '$lib/actions/inview';
+	import SectionHeader from '$lib/components/SectionHeader.svelte';
+	import { contact, mailto } from './contact';
+	import { LocalClock } from './clock.svelte';
+	import { Copier } from './copy.svelte';
+
+	type Command = {
+		id: string;
+		group: string;
+		label: string;
+		hint: string;
+		keywords: string;
+		icon: typeof Mail01Icon;
+		run: () => void;
+	};
+
+	const clock = new LocalClock();
+	const copier = new Copier();
+
+	const open = (url: string) => window.open(url, '_blank', 'noopener');
+	const commands: Command[] = [
+		{
+			id: 'email',
+			group: 'Contact',
+			label: 'Send an email',
+			hint: contact.email,
+			keywords: 'mail message hire write',
+			icon: Mail01Icon,
+			run: () => (location.href = mailto())
+		},
+		{
+			id: 'copy',
+			group: 'Contact',
+			label: 'Copy email address',
+			hint: 'to clipboard',
+			keywords: 'copy mail clipboard',
+			icon: Copy01Icon,
+			run: () => copier.copy(contact.email, 'email')
+		},
+		{
+			id: 'call',
+			group: 'Contact',
+			label: 'Call me',
+			hint: contact.phone.display,
+			keywords: 'phone call tel',
+			icon: CallIcon,
+			run: () => (location.href = contact.phone.href)
+		},
+		{
+			id: 'github',
+			group: 'Profiles',
+			label: 'GitHub',
+			hint: 'abubkerdarwish20',
+			keywords: 'code source repos',
+			icon: GithubIcon,
+			run: () => open(contact.github)
+		},
+		{
+			id: 'linkedin',
+			group: 'Profiles',
+			label: 'LinkedIn',
+			hint: 'in/abubker-darwish',
+			keywords: 'profile network career',
+			icon: Linkedin01Icon,
+			run: () => open(contact.linkedin)
+		},
+		{
+			id: 'cv',
+			group: 'Resume',
+			label: 'Download resume',
+			hint: 'PDF',
+			keywords: 'cv resume pdf download',
+			icon: Download01Icon,
+			run: () => {
+				const a = Object.assign(document.createElement('a'), {
+					href: contact.cv,
+					download: 'abubker-darwish-cv.pdf'
+				});
+				a.click();
+			}
+		}
+	];
+
+	let query = $state('');
+	let active = $state(0);
+	let input: HTMLInputElement;
+	let palette: HTMLElement;
+	let demo = true;
+
+	const results = $derived.by(() => {
+		const q = query.trim().toLowerCase();
+		return q
+			? commands.filter((c) => `${c.label} ${c.hint} ${c.keywords}`.toLowerCase().includes(q))
+			: commands;
+	});
+	const groups = $derived([...new Set(results.map((c) => c.group))]);
+
+	$effect(() => {
+		// Keep the highlight inside the filtered list
+		if (active >= results.length) active = Math.max(0, results.length - 1);
+	});
+
+	// First real interaction stops the demo and wipes whatever it had half-typed
+	function takeOver() {
+		if (!demo) return;
+		demo = false;
+		query = '';
+	}
+
+	function onkeydown(e: KeyboardEvent) {
+		takeOver();
+		if (e.key === 'ArrowDown') {
+			e.preventDefault();
+			active = (active + 1) % Math.max(1, results.length);
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			active = (active - 1 + results.length) % Math.max(1, results.length);
+		} else if (e.key === 'Enter') {
+			e.preventDefault();
+			results[active]?.run();
+		} else if (e.key === 'Escape') {
+			query = '';
+		}
+	}
+
+	// ⌘K / Ctrl+K anywhere on the page jumps into the palette
+	$effect(() => {
+		const onGlobal = (e: KeyboardEvent) => {
+			if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+				e.preventDefault();
+				takeOver();
+				palette.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				input.focus({ preventScroll: true });
+			}
+		};
+		addEventListener('keydown', onGlobal);
+		return () => removeEventListener('keydown', onGlobal);
+	});
+
+	$effect(() => clock.start());
+
+	// Show the shortcut the visitor will actually press
+	let shortcut = $state('⌘K');
+	$effect(() => {
+		if (!/Mac|iPhone|iPad/.test(navigator.userAgent)) shortcut = 'Ctrl K';
+	});
+
+	// Self-demo: types a couple of queries until the visitor touches anything
+	const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+	async function playDemo() {
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		for (const word of ['copy', 'linkedin', 'resume']) {
+			for (const ch of word) {
+				if (!demo) return;
+				query += ch;
+				await sleep(90);
+			}
+			await sleep(1400);
+			while (query && demo) {
+				query = query.slice(0, -1);
+				await sleep(40);
+			}
+			await sleep(400);
+		}
+		if (demo) query = '';
+	}
 </script>
 
-<section
-	class="relative z-10 py-16 md:py-24 px-3 sm:px-6 lg:px-8 overflow-hidden border-t border-gray-200 dark:border-white/5 scroll-m-16 scroll-section"
-	id="contact"
->
-	<div class="absolute inset-0 z-0 bg-hero-glow-light dark:bg-hero-glow pointer-events-none"></div>
+<section id="contact" class="scroll-section relative isolate py-20 md:py-28">
+	<SectionBackdrop
+		surface
+		pattern="grid"
+		glows={[
+			{ x: 75, y: 45, color: '#ea580c' },
+			{ x: 15, y: 85, color: '#f59e0b', w: 35, h: 40 }
+		]}
+	/>
 	<div
-		class="absolute left-[-10%] top-[20%] w-[800px] h-[800px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-40 pointer-events-none"
-	></div>
-	<div
-		class="absolute left-[-5%] top-[25%] w-[600px] h-[600px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-30 pointer-events-none"
-	></div>
-	<div
-		class="absolute left-[0%] top-[30%] w-[400px] h-[400px] rounded-full border border-gray-200/40 dark:border-white/5 opacity-20 pointer-events-none"
-	></div>
-	<div
-		class="absolute left-[10%] top-[20%] w-24 h-24 rounded-2xl bg-linear-to-br from-primary to-accent-orange opacity-10 blur-2xl animate-float pointer-events-none"
-	></div>
+		class="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-8"
+	>
+		<div>
+			<SectionHeader
+				align="left"
+				eyebrow="Contact"
+				title="Let's Connect &"
+				accent="Collaborate"
+				description="I'm currently available for freelance work and open to new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!"
+			/>
 
-	<div class="max-w-7xl mx-auto relative z-10">
-		<div class="grid grid-cols-12 gap-8 md:gap-12 items-start">
 			<div
-				class="col-span-12 lg:col-span-6 xl:col-span-7 space-y-6 md:space-y-8 text-center lg:text-left"
+				class="status mt-8 inline-flex items-center gap-3 rounded-2xl px-4 py-3 text-sm"
+				class:online={clock.online}
 			>
-				<div class="space-y-4">
-					<span class="text-brand-primary font-semibold tracking-wider uppercase text-sm"
-						>Contact Me</span
+				<span class="relative flex size-2.5">
+					{#if clock.online}<span
+							class="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-75"
+						></span>{/if}
+					<span class="dot relative size-2.5 rounded-full"></span>
+				</span>
+				<span class="text-gray-700 dark:text-gray-300">
+					{clock.online ? 'Online now' : 'Offline'} in Mukalla ·
+					<span class="font-mono font-semibold text-gray-900 tabular-nums dark:text-white"
+						>{clock.time}</span
 					>
-					<h2
-						class="text-xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
-					>
-						Let's <span class="text-brand-primary">Connect</span> &amp; Collaborate
-					</h2>
-					<p
-						class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed max-w-lg mx-auto lg:mx-0"
-					>
-						I'm currently available for freelance work and open to new opportunities. Whether you
-						have a question or just want to say hi, I'll try my best to get back to you!
-					</p>
-				</div>
+					<span class="text-gray-400">({clock.offset})</span>
+				</span>
+			</div>
+			<p class="mt-3 text-sm text-gray-500 dark:text-gray-400">
+				Working hours: {contact.hours.label}. Messages outside them get a reply the next working
+				day.
+			</p>
+		</div>
 
-				<div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-					<a
-						class="group flex items-center gap-3 px-4 lg:px-8 py-4 lg:py-4 rounded-full bg-brand-primary hover:bg-orange-700 text-white font-semibold text-base lg:text-lg shadow-lg shadow-orange-500/20 transition-all duration-300 transform hover:-translate-y-1"
-						href="mailto:abubker.darwish@gmail.com"
+		<div
+			bind:this={palette}
+			use:inview={{ onenter: playDemo }}
+			data-inview="false"
+			class="palette reveal-fade relative overflow-hidden rounded-2xl"
+			style="--d: 150ms"
+			role="presentation"
+			onpointerdown={takeOver}
+		>
+			<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3.5">
+				<HugeiconsIcon icon={Search01Icon} size={18} className="shrink-0 text-gray-500" />
+				<input
+					bind:this={input}
+					bind:value={query}
+					{onkeydown}
+					onfocus={takeOver}
+					class="min-w-0 flex-1 bg-transparent text-[15px] text-white placeholder:text-gray-500 focus:outline-none"
+					placeholder="Type a command or search…"
+					aria-label="Search contact options"
+					role="combobox"
+					aria-expanded="true"
+					aria-controls="contact-commands"
+					aria-activedescendant={results[active] ? `cmd-${results[active].id}` : undefined}
+				/>
+				<kbd class="kbd">{shortcut}</kbd>
+			</div>
+
+			<div id="contact-commands" class="h-[400px] overflow-y-auto p-2" role="listbox">
+				{#each groups as group (group)}
+					<p
+						class="px-3 pt-3 pb-1.5 text-[11px] font-semibold tracking-wider text-gray-500 uppercase"
 					>
-						<HugeiconsIcon icon={Mail01Icon} />
-						<span>Say Hello</span>
-					</a>
-				</div>
+						{group}
+					</p>
+					{#each results.filter((c) => c.group === group) as cmd (cmd.id)}
+						{@const i = results.indexOf(cmd)}
+						<button
+							id="cmd-{cmd.id}"
+							type="button"
+							role="option"
+							aria-selected={i === active}
+							class="item flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left"
+							class:active={i === active}
+							onmouseenter={() => (active = i)}
+							onclick={() => {
+								takeOver();
+								cmd.run();
+							}}
+						>
+							<span class="icon grid size-8 shrink-0 place-items-center rounded-lg">
+								{#if cmd.id === 'copy' && copier.copied === 'email'}
+									<HugeiconsIcon icon={CheckmarkCircle01Icon} size={16} />
+								{:else}
+									<HugeiconsIcon icon={cmd.icon} size={16} />
+								{/if}
+							</span>
+							<span class="flex-1 text-sm font-medium text-gray-100">
+								{cmd.id === 'copy' && copier.copied === 'email' ? 'Copied to clipboard' : cmd.label}
+							</span>
+							<span class="hidden truncate text-xs text-gray-500 sm:block">{cmd.hint}</span>
+							<span class="enter kbd" aria-hidden="true">↵</span>
+						</button>
+					{/each}
+				{:else}
+					<p class="px-3 py-10 text-center text-sm text-gray-500">
+						No results for “{query}” — try
+						<button
+							type="button"
+							class="text-brand-primary underline"
+							onclick={() => (query = 'email')}>email</button
+						>
+					</p>
+				{/each}
 			</div>
 
 			<div
-				class="col-span-12 lg:col-span-6 xl:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6"
+				class="flex items-center gap-4 border-t border-white/5 px-4 py-2.5 text-[11px] text-gray-500"
 			>
-				<div
-					class="group bg-white dark:bg-dark-card p-2 sm:p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-				>
-					<div
-						class="absolute right-0 top-0 w-20 h-20 bg-primary/5 rounded-bl-full group-hover:bg-primary/10 transition-colors"
-					></div>
-					<div class="flex items-start gap-3 md:gap-6 relative z-10">
-						<div
-							class="w-14 h-14 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-brand-primary flex items-center justify-center shrink-0"
-						>
-							<HugeiconsIcon icon={Mail01Icon} size={24} />
-						</div>
-						<div>
-							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Email</h4>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">
-								For general inquiries and projects
-							</p>
-							<a
-								class="text-base sm:text-lg font-medium text-gray-900 dark:text-white hover:text-brand-primary transition-colors break-all"
-								href="mailto:abubker.darwish@gmail.com"
-							>
-								Abubker.darwish@gmail.com
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div
-					class="group bg-white dark:bg-dark-card p-2 sm:p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-				>
-					<div
-						class="absolute right-0 top-0 w-20 h-20 bg-blue-50 dark:bg-blue-900/10 rounded-bl-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900/20 transition-colors"
-					></div>
-					<div class="flex items-start gap-3 md:gap-6 relative z-10">
-						<div
-							class="w-14 h-14 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center shrink-0"
-						>
-							<HugeiconsIcon icon={CallIcon} size={24} />
-						</div>
-						<div>
-							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Phone</h4>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">Sun - Thu: 8:00 - 17:00</p>
-							<a
-								class="text-base sm:text-lg font-medium text-gray-900 dark:text-white hover:text-blue-500 transition-colors"
-								href="tel:+967771074944"
-							>
-								(+967) 7710 749 44
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div
-					class="group bg-white dark:bg-dark-card p-2 sm:p-4 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-				>
-					<div
-						class="absolute right-0 top-0 w-20 h-20 bg-green-50 dark:bg-green-900/10 rounded-bl-full group-hover:bg-green-100 dark:group-hover:bg-green-900/20 transition-colors"
-					></div>
-					<div class="flex items-start gap-4 md:gap-6 relative z-10">
-						<div
-							class="w-14 h-14 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-500 flex items-center justify-center shrink-0"
-						>
-							<HugeiconsIcon icon={Location01Icon} size={24} />
-						</div>
-						<div>
-							<h4 class="text-lg font-bold text-gray-900 dark:text-white">Location</h4>
-							<p class="text-gray-500 dark:text-gray-400 text-sm mb-2">My Address</p>
-							<span class="text-base sm:text-lg font-medium text-gray-900 dark:text-white block">
-								Yemen-Hadramout-Mukalla
-							</span>
-						</div>
-					</div>
-				</div>
+				<span><kbd class="kbd">↑</kbd> <kbd class="kbd">↓</kbd> navigate</span>
+				<span><kbd class="kbd">↵</kbd> select</span>
+				<span class="hidden sm:inline"><kbd class="kbd">esc</kbd> clear</span>
+				{#if copier.copied}
+					<span
+						class="ml-auto text-emerald-400"
+						transition:fly={{ y: 6, duration: 300, easing: expoOut }}>✓ Copied {contact.email}</span
+					>
+				{/if}
 			</div>
 		</div>
 	</div>
 </section>
+
+<style>
+	.palette {
+		background: #0d0d10;
+		border: 1px solid rgb(255 255 255 / 0.08);
+		box-shadow:
+			0 40px 80px -30px rgb(0 0 0 / 0.55),
+			0 0 0 1px rgb(234 88 12 / 0.06);
+	}
+	.palette::before {
+		content: '';
+		position: absolute;
+		inset: -40% -20% auto auto;
+		width: 60%;
+		height: 80%;
+		background: radial-gradient(circle, rgb(234 88 12 / 0.16), transparent 65%);
+		pointer-events: none;
+	}
+	.item {
+		transition: background-color 0.15s;
+	}
+	.item.active {
+		background: rgb(255 255 255 / 0.06);
+	}
+	.icon {
+		color: #9ca3af;
+		background: rgb(255 255 255 / 0.05);
+		transition:
+			color 0.2s,
+			background-color 0.2s;
+	}
+	.item.active .icon {
+		color: white;
+		background: #ea580c;
+	}
+	.enter {
+		opacity: 0;
+		transition: opacity 0.15s;
+	}
+	.item.active .enter {
+		opacity: 1;
+	}
+	.kbd {
+		display: inline-grid;
+		place-items: center;
+		min-width: 1.4rem;
+		padding: 0.1rem 0.35rem;
+		border-radius: 0.375rem;
+		border: 1px solid rgb(255 255 255 / 0.1);
+		background: rgb(255 255 255 / 0.04);
+		color: #9ca3af;
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 10px;
+	}
+
+	.status {
+		background: rgb(0 0 0 / 0.03);
+		border: 1px solid rgb(229 231 235);
+	}
+	:global(.dark) .status {
+		background: rgb(255 255 255 / 0.03);
+		border-color: rgb(255 255 255 / 0.08);
+	}
+	.dot {
+		background: #9ca3af;
+	}
+	.status.online .dot {
+		background: #10b981;
+	}
+</style>

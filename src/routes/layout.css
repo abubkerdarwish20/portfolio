@@ -41,6 +41,16 @@ html {
 	--sidebar-accent-foreground: oklch(0.208 0.042 265.755);
 	--sidebar-border: oklch(0.929 0.013 255.508);
 	--sidebar-ring: oklch(0.704 0.04 256.788);
+
+	/* Motion tokens */
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+	/* Section atmosphere (see SectionBackdrop.svelte) */
+	--surface: #f6f7f9;
+	--glow-pct: 10%;
+	--pattern-ink: rgb(15 23 42 / 0.06);
+	--hairline: rgb(15 23 42 / 0.08);
 }
 
 .dark {
@@ -75,6 +85,11 @@ html {
 	--sidebar-accent-foreground: oklch(0.984 0.003 247.858);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
+
+	--surface: rgb(255 255 255 / 0.025);
+	--glow-pct: 15%;
+	--pattern-ink: rgb(255 255 255 / 0.045);
+	--hairline: rgb(255 255 255 / 0.08);
 }
 
 @font-face {
@@ -200,6 +215,58 @@ html {
 	.scroll-section {
 		scroll-margin-top: 100px;
 	}
+
+	/* Load-time reveals — pure CSS so they play on SSR markup without a hydration flash */
+	.reveal-line {
+		display: block;
+		overflow: hidden;
+		padding-bottom: 0.12em;
+		margin-bottom: -0.12em;
+	}
+	.reveal-line > * {
+		display: inline-block;
+		animation: reveal-rise 1.1s var(--ease-out-expo) both;
+		animation-delay: var(--d, 0ms);
+	}
+	.reveal-fade {
+		animation: reveal-fade 0.9s var(--ease-out-expo) both;
+		animation-delay: var(--d, 0ms);
+	}
+
+	/* Scroll-triggered variant: hold reveals until the `inview` action flips the flag */
+	[data-inview='false'] .reveal-line > *,
+	[data-inview='false'] .reveal-fade,
+	[data-inview='false'].reveal-fade {
+		animation-play-state: paused;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal-line > *,
+		.reveal-fade {
+			animation: none;
+		}
+	}
+}
+
+/* Theme switch: ThemeToggle drives a circular clip on the new snapshot, so skip the default crossfade */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
+@keyframes reveal-rise {
+	from {
+		transform: translateY(110%);
+	}
+}
+
+@keyframes reveal-fade {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+		filter: blur(8px);
+	}
 }
 
 @layer base {
@@ -208,5 +275,8 @@ html {
 	}
 	body {
 		@apply bg-background text-foreground;
+		/* Decorative glows must never widen the page on mobile. `clip` (not `hidden`)
+		   doesn't create a scroll container, so position: sticky keeps working. */
+		overflow-x: clip;
 	}
 }

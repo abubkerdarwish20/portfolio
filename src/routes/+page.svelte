@@ -1,11 +1,12 @@
 <script lang="ts">
 	import Contact from '$lib/components/contactSection/Contact.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+	import Footer from '$lib/components/footerSection/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import Hero from '$lib/components/heroSection/Hero.svelte';
 	import Experience from '$lib/components/experienceSection/Experience.svelte';
-	import Projects from '$lib/components/Projects.svelte';
+	import Projects from '$lib/components/projectsSection/Projects.svelte';
 	import Skills from '$lib/components/techSection/Skills.svelte';
+	import StudyCasesSection from '$lib/components/studyCasesSection/StudyCasesSection.svelte';
 </script>
 
 <svelte:head>
@@ -57,6 +58,7 @@
 	<Hero />
 	<Skills />
 	<Experience />
+	<StudyCasesSection />
 	<Projects />
 	<Contact />
 </main>

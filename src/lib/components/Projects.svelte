@@ -24,7 +24,7 @@
 			category: 'Next.js App',
 			description:
 				'An ultra-fast image gallery built with Next.js and Unsplash API, featuring intelligent blurring and stripe integration.',
-			tags: ['Next.js', 'Stripe', 'TypeScript'],
+			tags: ['Next.js', 'TypeScript'],
 			image: '/upslashy.png',
 			accent: 'blue-500',
 			github: 'https://github.com/abubkerdarwish20/image-bluray',
